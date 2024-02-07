@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "CryptMaster"
-version = "0.0.1"
+version = "0.0.2"
 description = "Startup Client for a Crypt Master Backend"
 readme = "README.md"
 authors = [{ name = "Huth S0lo", email = "john@themorphium.io" }]
@@ -27,7 +27,7 @@ requires-python = ">=3.9"
 dev = ["black", "bumpver", "isort", "pip-tools", "pytest"]
 
 [project.urls]
-Homepage = "https://github.com/HSCryptKeeper/CryptKeeperClient"
+Homepage = "https://github.com/TheCryptMaster/CryptMaster"
 
 [project.scripts]
 realpython = "reader.__main__:main"
