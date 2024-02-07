@@ -2,6 +2,8 @@ import base64
 import httpx
 import json
 import uuid
+import os
+import random
 
 
 from Crypto.Protocol.KDF import PBKDF2
@@ -14,6 +16,33 @@ from getpass import getpass
 from os.path import exists
 from os import getcwd
 from time import sleep
+
+
+
+
+def check_dot_ignore():
+    file = '.ignore'
+    if os.path.isfile(file):
+
+
+
+def get_create_config():
+    crypt_file = '.crypt_file'
+    if not os.path.isfile(crypt_file):
+        ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        salt = ''
+        for i in range(32):
+            salt += (random.choice(ALPHABET))
+        with open(crypt_file, 'w+') as f:
+            f.write(salt)
+    with open(crypt_file, 'r') as f:
+        salt = f.readline()
+
+crypt_config = get_create_config()
+
+
+
+
 
 
 system_id = uuid.getnode()
