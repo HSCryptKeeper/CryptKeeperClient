@@ -2,11 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
-.pypirc
+*.pypirc
 
 # C extensions
 *.so
-/.pypirc
+
 # Distribution / packaging
 .Python
 build/
