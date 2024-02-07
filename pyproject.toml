@@ -1,5 +1,5 @@
 [build-system]
-requires      = ["setuptools>=69.0.3", "wheel", "pycryptodome=3.20.0", "httpx>=1.3.9"]
+requires      = ["setuptools>=69.0.3", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -16,7 +16,10 @@ classifiers = [
 ]
 keywords = ["python", "password", "security", "key server"]
 
-
+dependencies = [
+  "pycryptodome==3.20.0",
+  "httpx>=1.3.9"
+]
 
 requires-python = ">=3.9"
 
