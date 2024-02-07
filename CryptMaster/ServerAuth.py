@@ -5,9 +5,15 @@ import time
 import base64
 
 
-def calculate_sha256_hash(data):
-    sha256_hash = hashlib.sha256(data.encode()).hexdigest()
-    return sha256_hash
+
+from argon2 import PasswordHasher
+
+
+
+def calculate_password_hash(data):
+    ph = PasswordHasher()
+    hash = ph.hash(data)
+    return hash
 
 
 def generate_cnonce():
@@ -37,7 +43,7 @@ def create_follow_up_request(url, realm, nonce):
     A1 = f"{username}:{realm}:{password}"
     A2 = f"GET:{uri}"
 
-    response = calculate_sha256_hash(f"{calculate_sha256_hash(A1)}:{nonce}:{nc}:{cnonce}:{qop}:{calculate_sha256_hash(A2)}")
+    response = calculate_password_hash(f"{calculate_password_hash(A1)}:{nonce}:{nc}:{cnonce}:{qop}:{calculate_password_hash(A2)}")
 
     # Construct the Authorization header
     authorization_header = (
