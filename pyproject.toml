@@ -3,9 +3,9 @@ requires      = ["setuptools>=69.0.3", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "HSCryptKeeper"
+name = "CryptMaster"
 version = "0.0.1"
-description = "Startup Client for a Crypt Keeper Backend"
+description = "Startup Client for a Crypt Master Backend"
 readme = "README.md"
 authors = [{ name = "Huth S0lo", email = "john@themorphium.io" }]
 license = { file = "LICENSE" }
