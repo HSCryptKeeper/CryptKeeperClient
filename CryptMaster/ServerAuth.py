@@ -5,9 +5,9 @@ import time
 import base64
 
 
-def calculate_md5_hash(data):
-    md5_hash = hashlib.md5(data.encode()).hexdigest()
-    return md5_hash
+def calculate_sha256_hash(data):
+    sha256_hash = hashlib.sha256(data.encode()).hexdigest()
+    return sha256_hash
 
 
 def generate_cnonce():
@@ -30,13 +30,14 @@ def create_follow_up_request(url, realm, nonce):
     cnonce = generate_cnonce()
     nc = "00000001"
     qop = "auth"
-    algorithm = "MD5"
+    algorithm = "SHA256"
+    algorithm = "SHA256"
 
     # Calculate the hash of A1, A2, and the final response
     A1 = f"{username}:{realm}:{password}"
     A2 = f"GET:{uri}"
 
-    response = calculate_md5_hash(f"{calculate_md5_hash(A1)}:{nonce}:{nc}:{cnonce}:{qop}:{calculate_md5_hash(A2)}")
+    response = calculate_sha256_hash(f"{calculate_sha256_hash(A1)}:{nonce}:{nc}:{cnonce}:{qop}:{calculate_sha256_hash(A2)}")
 
     # Construct the Authorization header
     authorization_header = (
