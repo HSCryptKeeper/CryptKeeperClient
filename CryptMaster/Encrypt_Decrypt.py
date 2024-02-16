@@ -49,8 +49,7 @@ def aesCbcPbkdf2DecryptFromBase64(COMMON_ENCRYPTION_KEY, ciphertextBase64):
   return decryptedtextP
 
 def encrypt_secret(COMMON_ENCRYPTION_KEY, plain_text_secret):
-    string_key = json.dumps(plain_text_secret)
-    encrypted_secret = aesCbcPbkdf2EncryptToBase64(COMMON_ENCRYPTION_KEY, json.dumps(string_key))
+    encrypted_secret = aesCbcPbkdf2EncryptToBase64(COMMON_ENCRYPTION_KEY, json.dumps(plain_text_secret))
     return encrypted_secret
 
 

@@ -70,7 +70,7 @@ class CryptMaster:
 
     def enroll_server(self):
         payload = {'system_id': self.system_id, 'system_salt': self.SALT}
-        url = f'{self.server}/enroll_server'
+        url = f'{self.server}/v2/enroll_server'
         while True:
             response = httpx.post(url=url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
