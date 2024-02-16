@@ -53,7 +53,12 @@ class CryptMaster:
         auth_url = f'{self.server}/v2/start_auth'
         while True:
             payload = {"requested_password": requested_secret, 'system_id': self.system_id}
-            get_nonce = httpx.post(url=auth_url, json=payload, timeout=5, verify=False)
+            response = httpx.post(url=auth_url, json=payload, timeout=5, verify=False)
+            if response.status_code != 200:
+                print('Did not get a good response')
+                sleep(20)
+                continue
+            response = response.json()
             response = httpx.post(url=url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
                 print('Did not get a good response')
