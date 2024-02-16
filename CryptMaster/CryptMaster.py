@@ -65,7 +65,7 @@ class CryptMaster:
                 print('Failed to get auth nonce')
                 return
             ph = PasswordHasher()
-            payload['auth_response'] = ph.hash(self.SALT + nonce)
+            payload['auth_response'] = ph.hash(nonce + self.SALT)
             response = httpx.post(url=url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
                 print('Did not get a good response')
