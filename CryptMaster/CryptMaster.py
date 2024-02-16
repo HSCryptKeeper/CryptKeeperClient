@@ -3,6 +3,7 @@ import os
 import random
 import uuid
 
+from argon2 import PasswordHasher
 from time import sleep
 
 
@@ -59,6 +60,12 @@ class CryptMaster:
                 sleep(20)
                 continue
             response = response.json()
+            nonce = response.get('nonce', None)
+            if nonce == None:
+                print('Failed to get auth nonce')
+                return
+            ph = PasswordHasher()
+            payload['auth_response'] = ph.hash(self.SALT + nonce)
             response = httpx.post(url=url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
                 print('Did not get a good response')
