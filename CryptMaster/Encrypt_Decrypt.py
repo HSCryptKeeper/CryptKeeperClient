@@ -48,13 +48,15 @@ def aesCbcPbkdf2DecryptFromBase64(COMMON_ENCRYPTION_KEY, ciphertextBase64):
   decryptedtextP = decryptedtext.decode("UTF-8")
   return decryptedtextP
 
-def encrypt_key(COMMON_ENCRYPTION_KEY, skey_json):
-    encoded_skey = aesCbcPbkdf2EncryptToBase64(COMMON_ENCRYPTION_KEY, json.dumps(skey_json))
-    return encoded_skey
+def encrypt_secret(COMMON_ENCRYPTION_KEY, plain_text_secret):
+    string_key = json.dumps(plain_text_secret)
+    encrypted_secret = aesCbcPbkdf2EncryptToBase64(COMMON_ENCRYPTION_KEY, json.dumps(string_key))
+    return encrypted_secret
 
-def decrypt_key(COMMON_ENCRYPTION_KEY, encoded_skey):
-    decoded_key = json.loads(aesCbcPbkdf2DecryptFromBase64(COMMON_ENCRYPTION_KEY, encoded_skey))
-    return decoded_key
+
+def decrypt_secret(COMMON_ENCRYPTION_KEY, encrypted_secret):
+  decrypted_secret = json.loads(aesCbcPbkdf2DecryptFromBase64(COMMON_ENCRYPTION_KEY, encrypted_secret))
+  return decrypted_secret
 
 
 
