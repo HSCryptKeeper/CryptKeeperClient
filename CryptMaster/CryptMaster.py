@@ -51,7 +51,9 @@ class CryptMaster:
     def get_secret(self, requested_secret):
         payload = {"requested_password": requested_secret, 'system_id': self.system_id}
         url = f'{self.server}/get_secret'
+        auth_url = f'{self.server}/v2/start_auth'
         while True:
+
             response = httpx.post(url=url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
                 print('Did not get a good response')
