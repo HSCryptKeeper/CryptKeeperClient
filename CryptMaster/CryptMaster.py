@@ -73,7 +73,7 @@ class CryptMaster:
         url = f'{self.server}/v2/enroll_server'
         while True:
             response = httpx.post(url=url, json=payload, timeout=5, verify=False)
-            if response.status_code != 200:
+            if response.status_code != 200 or response.status_code != 429:
                 print('Did not get a good response')
                 sleep(20)
                 continue
