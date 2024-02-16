@@ -50,7 +50,7 @@ class CryptMaster:
         self.server = f'https://{server}:{port}'
 
     def get_secret(self, requested_secret):
-        url = f'{self.server}/get_secret'
+        url = f'{self.server}/v2/get_secret'
         auth_url = f'{self.server}/v2/start_auth'
         while True:
             payload = {"requested_password": requested_secret, 'system_id': self.system_id}
