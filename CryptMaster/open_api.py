@@ -24,6 +24,3 @@ def confirm_cert_skip():
         return True
     verify_input = input('Should the certificate be verified before proceeding? (yes/no): ')
     return verify_input.lower() not in ['no', 'n']
-
-
-open_api()
