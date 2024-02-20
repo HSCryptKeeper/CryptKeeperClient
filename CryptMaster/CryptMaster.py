@@ -1,5 +1,6 @@
 import httpx
 import os
+import platformdirs
 import random
 import uuid
 
@@ -7,7 +8,7 @@ from argon2 import PasswordHasher
 from time import sleep
 
 
-
+appname = 'CryptMaster'
 
 
 def check_dot_ignore():
@@ -26,7 +27,7 @@ def check_dot_ignore():
 
 
 def get_create_config():
-    crypt_file = '.crypt_file'
+    crypt_file = platformdirs.user_config_dir(appname) + '.crypt_file'
     if not os.path.isfile(crypt_file):
         ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         salt = ''
