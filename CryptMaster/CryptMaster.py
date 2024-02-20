@@ -8,26 +8,13 @@ from argon2 import PasswordHasher
 from time import sleep
 
 
-appname = 'CryptMaster'
 
 
-def check_dot_ignore():
-    ignore_text = '\n# Added by CryptMaster\n.crypt_file'
-    file = '.gitignore'
-    if os.path.isfile(file):
-        with open(file, 'r') as f:
-            git_ignore = f.read()
-        if not '.crypt_file' in git_ignore:
-            with open(file, 'a') as f:
-                f.write(ignore_text)
-    else:
-        with open(file, 'w') as f:
-            f.write(ignore_text[1:])
 
 
 
 def get_create_config():
-    crypt_file = platformdirs.user_config_dir(appname) + '.crypt_file'
+    crypt_file = platformdirs.user_config_dir('CryptMaster') + '.crypt_file'
     if not os.path.isfile(crypt_file):
         ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         salt = ''
@@ -35,7 +22,6 @@ def get_create_config():
             salt += (random.choice(ALPHABET))
         with open(crypt_file, 'w+') as f:
             f.write(salt)
-        check_dot_ignore()
     with open(crypt_file, 'r') as f:
         crypt_config = f.readline()
     return crypt_config
@@ -86,20 +72,21 @@ class CryptMaster:
     def enroll_server(self):
         payload = {'system_id': self.system_id, 'system_salt': self.SALT}
         url = f'{self.server}/v2/enroll_server'
-        while True:
-            response = httpx.post(url=url, json=payload, timeout=5, verify=False)
-            if response.status_code != 200 or response.status_code != 429:
-                print('Did not get a good response')
-                sleep(20)
-                continue
-            response = response.json()
-            status = response.get('response', None)
-            if status is not None:
-                break
-            else:
-                print('Did not get a good response')
-                sleep(20)
-                continue
+        response = httpx.post(url=url, json=payload, timeout=5, verify=False)
+        #while True:
+        #    if response.status_code != 200 or response.status_code != 429:
+        #        print('Did not get a good response')
+        #        sleep(20)
+        #        continue
+        #    response = response.json()
+        #    status = response.get('response', None)
+        #    if status is not None:
+        #        break
+        #    else:
+        #        print('Did not get a good response')
+        #        sleep(20)
+        #        continue
+        status = response.text()
         return status
 
 
