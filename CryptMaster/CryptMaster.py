@@ -86,7 +86,7 @@ class CryptMaster:
         #        print('Did not get a good response')
         #        sleep(20)
         #        continue
-        status = response.text()
+        status = response.text
         return status
 
 
