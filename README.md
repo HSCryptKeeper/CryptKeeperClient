@@ -1,6 +1,6 @@
 # Crypt Master - Client
 
-Documenation can be found [here](https://thecryptmaster.github.io/ 'Crypt Master Documenation').
+Documenation can be found [here](https://the-crypt-master.readthedocs.io 'Crypt Master Documenation').
 
 
 ToDo: Validate that registration doesnt change after reboot.  Add better response notifications.  Create proper documenation.
