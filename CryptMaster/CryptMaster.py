@@ -14,7 +14,7 @@ from time import sleep
 
 
 def get_create_config():
-    crypt_file = platformdirs.user_config_dir('CryptMaster') + '.crypt_file'
+    crypt_file = platformdirs.user_config_dir('CryptMaster') + '/.crypt_file'
     if not os.path.isfile(crypt_file):
         ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         salt = ''
