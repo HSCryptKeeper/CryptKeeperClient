@@ -43,7 +43,7 @@ class CryptMaster:
             payload = {"requested_password": requested_secret, 'system_id': self.system_id}
             response = httpx.post(url=auth_url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
-                print('Did not get a good response')
+                print('Did not get a good response') #ToDo - Change response to be more useful
                 sleep(20)
                 continue
             response = response.json()
@@ -55,7 +55,7 @@ class CryptMaster:
             payload['auth_response'] = ph.hash(nonce + self.SALT)
             response = httpx.post(url=url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
-                print('Did not get a good response')
+                print('Did not get a good response') #ToDo - Change response to be more useful
                 sleep(20)
                 continue
             response = response.json()
