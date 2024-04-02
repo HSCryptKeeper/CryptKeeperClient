@@ -2,14 +2,14 @@
 
 
 import httpx
-import uuid
+from system_data import get_system_id
 
 from getpass import getpass
 
 ALLOW_EXPIRED_CERTS = False
 
 def open_api():
-    print(f'Current Node ID - {uuid.getnode()}\n')
+    print(f'Current Node ID - {get_system_id()}\n')
     user = input('Enter email address: ')
     verify=confirm_cert_skip()
     domain = user.split('@')[1]

@@ -2,10 +2,11 @@ import httpx
 import os
 import platformdirs
 import random
-import uuid
+
 
 from argon2 import PasswordHasher
 from time import sleep
+from system_data import get_system_id
 
 
 
@@ -33,7 +34,7 @@ def get_create_config():
 class CryptMaster:
     def __init__(self, server, port=2053):
         self.SALT = get_create_config()
-        self.system_id = uuid.getnode()
+        self.system_id = get_system_id()
         self.server = f'https://{server}:{port}'
 
     def get_secret(self, requested_secret):
