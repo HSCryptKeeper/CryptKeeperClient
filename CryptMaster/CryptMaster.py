@@ -6,7 +6,7 @@ import random
 
 from argon2 import PasswordHasher
 from time import sleep
-from CryptMaster.SystemId import get_system_id
+from .SystemId import get_system_id
 
 
 
