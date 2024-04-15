@@ -34,7 +34,8 @@ def get_create_config():
 class CryptMaster:
     def __init__(self, server, port=2053):
         self.SALT = get_create_config()
-        self.system_id = get_system_id()
+        self.system_uuid = get_system_id()
+        self.system_id = encrypt_secret(self.SALT + self.system_id)
         self.server = f'https://{server}:{port}'
 
     def get_secret(self, requested_secret):

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "CryptMaster"
-version = "0.0.21"
+version = "0.0.22"
 description = "Startup Client for a Crypt Master Backend"
 readme = "README.md"
 authors = [{ name = "Huth S0lo", email = "john@themorphium.io" }]
