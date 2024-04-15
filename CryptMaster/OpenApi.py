@@ -2,14 +2,15 @@
 
 
 import httpx
-from .SystemId import get_system_id
+from .CryptMaster import CryptMaster
 
 from getpass import getpass
 
 ALLOW_EXPIRED_CERTS = False
 
 def open_api():
-    print(f'Current Node ID - {get_system_id()}\n')
+    sys_instance = CryptMaster('test')
+    print(f'Current Node ID - {sys_instance.system_id}\n')
     user = input('Enter email address: ')
     verify=confirm_cert_skip()
     domain = user.split('@')[1]
