@@ -12,7 +12,7 @@ def get_system_id():
         command = "wmic bios get serialnumber"
     elif "linux" in os_type:
         command = "ls -l /dev/disk/by-uuid"
-    response = response = os.popen(command).read()
+    response = os.popen(command).read()
     return locate_serial(response)
 
 
