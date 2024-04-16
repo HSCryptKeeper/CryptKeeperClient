@@ -35,7 +35,7 @@ class CryptMaster:
     def __init__(self, server, port=2053):
         self.SALT = get_create_config()
         self.system_uuid = get_system_id()
-        self.system_id = hashlib.md5((self.SALT + self.system_uuid).encode())
+        self.system_id = hashlib.md5((self.SALT + self.system_uuid).encode()).hexdigest()
         self.server = f'https://{server}:{port}'
 
 
