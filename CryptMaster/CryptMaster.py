@@ -9,7 +9,7 @@ from time import sleep
 from .SystemId import get_system_id
 from .Encrypt_Decrypt import encrypt_secret
 
-
+ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 
@@ -18,7 +18,6 @@ from .Encrypt_Decrypt import encrypt_secret
 def get_create_config():
     crypt_file = platformdirs.user_config_dir('.crypt_file')
     if not os.path.isfile(crypt_file):
-        ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         salt = ''
         for i in range(32):
             salt += (random.choice(ALPHABET))
@@ -36,8 +35,16 @@ class CryptMaster:
     def __init__(self, server, port=2053):
         self.SALT = get_create_config()
         self.system_uuid = get_system_id()
-        self.system_id = encrypt_secret(self.SALT, self.system_uuid)
+        self.unclean_id = encrypt_secret(self.SALT, self.system_uuid)
+        self.system_id = self.clean_system_id(self.unclean_id)
         self.server = f'https://{server}:{port}'
+
+    def clean_system_id(self, unclean_id):
+        system_id = ''
+        for letter in unclean_id:
+            if letter in ALPHABET:
+                system_id += letter
+        return system_id
 
     def get_secret(self, requested_secret):
         url = f'{self.server}/v2/get_secret'
