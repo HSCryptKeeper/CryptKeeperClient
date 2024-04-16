@@ -36,7 +36,7 @@ class CryptMaster:
     def __init__(self, server, port=2053):
         self.SALT = get_create_config()
         self.system_uuid = get_system_id()
-        self.system_secret = self.SALT + self.system_uuid
+        self.system_secret = f'{self.SALT} + {self.system_uuid}'
         self.system_id = encrypt_secret(self.system_secret)
         self.server = f'https://{server}:{port}'
 
