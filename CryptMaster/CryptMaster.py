@@ -1,3 +1,4 @@
+import hashlib
 import httpx
 import os
 import platformdirs
@@ -7,7 +8,6 @@ import random
 from argon2 import PasswordHasher
 from time import sleep
 from .SystemId import get_system_id
-from .Encrypt_Decrypt import encrypt_secret
 
 ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -35,16 +35,9 @@ class CryptMaster:
     def __init__(self, server, port=2053):
         self.SALT = get_create_config()
         self.system_uuid = get_system_id()
-        self.unclean_id = encrypt_secret(self.SALT, self.system_uuid)
-        self.system_id = self.clean_system_id(self.unclean_id)
+        self.system_id = hashlib.md5((self.SALT + self.system_uuid).encode())
         self.server = f'https://{server}:{port}'
 
-    def clean_system_id(self, unclean_id):
-        system_id = ''
-        for letter in unclean_id:
-            if letter in ALPHABET:
-                system_id += letter
-        return system_id
 
     def get_secret(self, requested_secret):
         url = f'{self.server}/v2/get_secret'
