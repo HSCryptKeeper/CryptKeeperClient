@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "CryptMaster"
-version = "0.0.33"
+version = "0.0.34"
 description = "Startup Client for a Crypt Master Backend"
 readme = "README.md"
 authors = [{ name = "Huth S0lo", email = "john@themorphium.io" }]
@@ -17,14 +17,14 @@ classifiers = [
 keywords = ["python", "password", "security", "key server"]
 
 dependencies = [
-  "pycryptodome==3.20.0",
-  "httpx==0.26.0",
-  "argon2-cffi==23.1.0",
-  "platformdirs==4.2.0",
+  "pycryptodome>=3.20.0",
+  "httpx>=0.27.0",
+  "argon2-cffi>=23.1.0",
+  "platformdirs==4.2.2",
   "pypedreams==0.0.1"
 ]
 
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 [project.optional-dependencies]
 dev = ["black", "bumpver", "isort", "pip-tools", "pytest"]
