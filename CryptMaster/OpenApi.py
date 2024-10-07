@@ -1,18 +1,20 @@
 #!/usr/bin/python3
 
 
-import httpx
-from .CryptMaster import CryptMaster
-
 from getpass import getpass
 
+import httpx
+
+from .CryptMaster import CryptMaster
+
 ALLOW_EXPIRED_CERTS = False
+
 
 def open_api():
     sys_instance = CryptMaster('test')
     print(f'Current Node ID - {sys_instance.system_id}\n')
     user = input('Enter email address: ')
-    verify=confirm_cert_skip()
+    verify = confirm_cert_skip()
     domain = user.split('@')[1]
     url = f'https://secure-api.{domain}:2053/v2/enable_api'
     user_pass = getpass('Enter user password: ')
@@ -21,6 +23,7 @@ def open_api():
     response = httpx.post(url=url, json=payload, verify=verify, timeout=15)
     print(response.json())
     return
+
 
 def confirm_cert_skip():
     if not ALLOW_EXPIRED_CERTS:

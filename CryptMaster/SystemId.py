@@ -16,7 +16,6 @@ def get_system_id():
     return locate_serial(response)
 
 
-
 def locate_serial(response):
     serial, serial_text = '', None
     words = response.split()
@@ -29,5 +28,3 @@ def locate_serial(response):
             if letter != '-':
                 serial += letter
     return serial
-
-

@@ -1,6 +1,7 @@
-from setuptools import setup, find_packages
 import codecs
 import os
+
+from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -13,7 +14,7 @@ setup(
     author="Huth S0lo",
     author_email="john@themorphium.io",
     description="Crypt Master Client for use with a Crypt Master Server",
-    url = "https://github.com/TheCryptMaster/CryptMaster",
+    url="https://github.com/TheCryptMaster/CryptMaster",
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),

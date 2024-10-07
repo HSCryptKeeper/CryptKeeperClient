@@ -1,18 +1,15 @@
 import hashlib
-import httpx
 import os
-import platformdirs
 import random
-
-
-from argon2 import PasswordHasher
 from time import sleep
+
+import httpx
+import platformdirs
+from argon2 import PasswordHasher
+
 from .SystemId import get_system_id
 
 ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-
-
 
 
 def get_create_config():
@@ -28,16 +25,12 @@ def get_create_config():
     return crypt_config
 
 
-
-
-
 class CryptMaster:
     def __init__(self, server, port=2053):
         self.SALT = get_create_config()
         self.system_uuid = get_system_id()
         self.system_id = hashlib.md5((self.SALT + self.system_uuid).encode()).hexdigest()
         self.server = f'https://{server}:{port}'
-
 
     def get_secret(self, requested_secret):
         url = f'{self.server}/v2/get_secret'
@@ -46,7 +39,7 @@ class CryptMaster:
             payload = {"requested_password": requested_secret, 'system_id': self.system_id}
             response = httpx.post(url=auth_url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
-                print('Did not get a good response') #ToDo - Change response to be more useful
+                print('Did not get a good response')  # ToDo - Change response to be more useful
                 sleep(20)
                 continue
             response = response.json()
@@ -58,7 +51,7 @@ class CryptMaster:
             payload['auth_response'] = ph.hash(nonce + self.SALT)
             response = httpx.post(url=url, json=payload, timeout=5, verify=False)
             if response.status_code != 200:
-                print('Did not get a good response') #ToDo - Change response to be more useful
+                print('Did not get a good response')  # ToDo - Change response to be more useful
                 sleep(20)
                 continue
             response = response.json()
@@ -76,7 +69,7 @@ class CryptMaster:
         payload = {'system_id': self.system_id, 'system_salt': self.SALT}
         url = f'{self.server}/v2/enroll_server'
         response = httpx.post(url=url, json=payload, timeout=5, verify=False)
-        #while True:
+        # while True:
         #    if response.status_code != 200 or response.status_code != 429:
         #        print('Did not get a good response')
         #        sleep(20)
@@ -91,6 +84,3 @@ class CryptMaster:
         #        continue
         status = response.text
         return status
-
-
-
